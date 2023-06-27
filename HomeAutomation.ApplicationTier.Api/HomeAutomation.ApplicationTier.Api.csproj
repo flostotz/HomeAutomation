@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\HomeAutomation.ApplicationTier.BusinessLogic\HomeAutomation.ApplicationTier.BusinessLogic.csproj" />
+    <ProjectReference Include="..\HomeAutomation.ApplicationTier.DataAccess\HomeAutomation.ApplicationTier.DataAccess.csproj" />
+    <ProjectReference Include="..\HomeAutomation.ApplicationTier.Entity\HomeAutomation.ApplicationTier.Entity.csproj" />
+  </ItemGroup>
+
+</Project>

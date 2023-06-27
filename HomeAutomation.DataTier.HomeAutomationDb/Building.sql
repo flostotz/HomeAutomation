@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Building]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [State] NVARCHAR(MAX) NOT NULL, 
+    [ZipCode] NVARCHAR(10) NOT NULL, 
+    [Street] NVARCHAR(MAX) NOT NULL, 
+    [Housenumber] NVARCHAR(5) NOT NULL
+)

@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[DeviceType]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Type] NVARCHAR(MAX) NOT NULL
+)

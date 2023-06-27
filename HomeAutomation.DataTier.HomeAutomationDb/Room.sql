@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Room]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Name] NVARCHAR(MAX) NOT NULL, 
+    [Building] UNIQUEIDENTIFIER NOT NULL, 
+    CONSTRAINT [FK_Room_Building] FOREIGN KEY ([Id]) REFERENCES [Building]([Id])
+)
