@@ -9,9 +9,9 @@ namespace HomeAutomation.ApplicationTier.Entity.Interfaces.Services.v1_0
         /// </summary>
         /// <returns></returns>
         Task<IList<Device>> GetAll();
-        Task<Device> GetOne(int deviceId);
+        Task<Device> GetOne(Guid deviceId);
         Task Update(Device device);
         Task Add(Device device);
-        Task Delete(int deviceId);
+        Task Delete(Guid deviceId);
     }
 }

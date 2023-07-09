@@ -9,9 +9,9 @@ namespace HomeAutomation.ApplicationTier.Entity.Interfaces.Services.v1_0
         /// </summary>
         /// <returns></returns>
         Task<IList<Room>> GetAll();
-        Task<Room> GetOne(int roomId);
+        Task<Room> GetOne(Guid roomId);
         Task Update(Room room);
         Task Add(Room room);
-        Task Delete(int roomId);
+        Task Delete(Guid roomId);
     }
 }
