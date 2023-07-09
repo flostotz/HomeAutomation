@@ -3,7 +3,6 @@ using HomeAutomation.ApplicationTier.Entity;
 using HomeAutomation.ApplicationTier.DataAccess;
 using Microsoft.OpenApi.Models;
 using HomeAutomation.ApplicationTier.BusinessLogic;
-using HomeAutomation.ApplicationTier.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +44,7 @@ void ConfigureServices(IServiceCollection services)
         .AddServices()
         .AddCORS();
 
+    services.AddMapster();
     services.AddControllers();
     services.AddApiVersioning();
     services.AddSwaggerGen(c =>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using HomeAutomation.ApplicationTier.Entity.Dtos.v1_0;
 using HomeAutomation.ApplicationTier.Entity.Entities.v1_0;
 using HomeAutomation.ApplicationTier.Entity.Interfaces.Services.v1_0;
 using Microsoft.AspNetCore.Mvc;
@@ -28,28 +29,31 @@ namespace HomeAutomation.ApplicationTier.Api.Controllers.v1_0
 
         [HttpPut]
         [MapToApiVersion("1.0")]
-        public async Task Update(DeviceValueHistory deviceValueHistory)
+        public async Task Update(DeviceValueHistoryDto deviceValueHistoryDto)
         {
+            var deviceValueHistory = deviceValueHistoryDto.ToEntity();
+
             await _deviceValueHistoryService.Update(deviceValueHistory);
         }
 
         [HttpGet("{id:int}")]
         [MapToApiVersion("1.0")]
-        public async Task<DeviceValueHistory> GetOne([FromRoute] int id)
+        public async Task<DeviceValueHistory> GetOne([FromRoute] Guid id)
         {
             return await _deviceValueHistoryService.GetOne(id);
         }
 
         [HttpPost]
         [MapToApiVersion("1.0")]
-        public async Task Add(DeviceValueHistory deviceValueHistory)
+        public async Task Add(DeviceValueHistoryDto deviceValueHistoryDto)
         {
+            var deviceValueHistory = deviceValueHistoryDto.ToEntity();
             await _deviceValueHistoryService.Add(deviceValueHistory);
         }
 
         [HttpDelete("{id}")]
         [MapToApiVersion("1.0")]
-        public async Task Delete([FromRoute] int id)
+        public async Task Delete([FromRoute] Guid id)
         {
             await _deviceValueHistoryService.Delete(id);
         }

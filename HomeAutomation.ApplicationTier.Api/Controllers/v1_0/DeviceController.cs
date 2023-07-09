@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using HomeAutomation.ApplicationTier.Entity.Dtos.v1_0;
 using HomeAutomation.ApplicationTier.Entity.Entities.v1_0;
 using HomeAutomation.ApplicationTier.Entity.Interfaces.Services.v1_0;
 using Microsoft.AspNetCore.Mvc;
@@ -28,28 +29,32 @@ namespace HomeAutomation.ApplicationTier.Api.Controllers.v1_0
 
         [HttpPut]
         [MapToApiVersion("1.0")]
-        public async Task Update(Device device)
+        public async Task Update(DeviceDto deviceDto)
         {
+            var device = deviceDto.ToEntity();
+
             await _deviceService.Update(device);
         }
 
         [HttpGet("{id:int}")]
         [MapToApiVersion("1.0")]
-        public async Task<Device> GetOne([FromRoute] int id)
+        public async Task<Device> GetOne([FromRoute] Guid id)
         {
             return await _deviceService.GetOne(id);
         }
 
         [HttpPost]
         [MapToApiVersion("1.0")]
-        public async Task Add(Device device)
+        public async Task Add(DeviceDto deviceDto)
         {
+            var device = deviceDto.ToEntity();
+
             await _deviceService.Add(device);
         }
 
         [HttpDelete("{id}")]
         [MapToApiVersion("1.0")]
-        public async Task Delete([FromRoute] int id)
+        public async Task Delete([FromRoute] Guid id)
         {
             await _deviceService.Delete(id);
         }

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using HomeAutomation.ApplicationTier.Entity.Dtos.v1_0;
 using HomeAutomation.ApplicationTier.Entity.Entities.v1_0;
 using HomeAutomation.ApplicationTier.Entity.Interfaces.Services.v1_0;
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeAutomation.ApplicationTier.Api.Controllers.v1_0
@@ -28,28 +30,32 @@ namespace HomeAutomation.ApplicationTier.Api.Controllers.v1_0
 
         [HttpPut]
         [MapToApiVersion("1.0")]
-        public async Task Update(Building building)
+        public async Task Update(BuildingDto buildingDto)
         {
+            var building = buildingDto.ToEntity();
+
             await _buildingService.Update(building);
         }
 
         [HttpGet("{id:int}")]
         [MapToApiVersion("1.0")]
-        public async Task<Building> GetOne([FromRoute] int id)
+        public async Task<Building> GetOne([FromRoute] Guid id)
         {
             return await _buildingService.GetOne(id);
         }
 
         [HttpPost]
         [MapToApiVersion("1.0")]
-        public async Task Add(Building building)
+        public async Task Add(BuildingDto buildingDto)
         {
+            var building = buildingDto.ToEntity();
+
             await _buildingService.Add(building);
         }
 
         [HttpDelete("{id}")]
         [MapToApiVersion("1.0")]
-        public async Task Delete([FromRoute] int id)
+        public async Task Delete([FromRoute] Guid id)
         {
             await _buildingService.Delete(id);
         }
