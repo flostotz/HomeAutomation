@@ -17,7 +17,7 @@ namespace HomeAutomation.ApplicationTier.BusinessLogic.Services.v1_0
             return await _unitOfWork.Repository<DeviceValueHistory>().GetAllAsync();
         }
 
-        public async Task<DeviceValueHistory> GetOne(int deviceValueHistoryId)
+        public async Task<DeviceValueHistory> GetOne(Guid deviceValueHistoryId)
         {
             return await _unitOfWork.Repository<DeviceValueHistory>().FindAsync(deviceValueHistoryId);
         }
@@ -59,7 +59,7 @@ namespace HomeAutomation.ApplicationTier.BusinessLogic.Services.v1_0
             }
         }
 
-        public async Task Delete(int deviceValueHistoryId)
+        public async Task Delete(Guid deviceValueHistoryId)
         {
             try
             {

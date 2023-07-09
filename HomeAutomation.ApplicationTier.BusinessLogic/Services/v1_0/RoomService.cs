@@ -17,7 +17,7 @@ namespace HomeAutomation.ApplicationTier.BusinessLogic.Services.v1_0
             return await _unitOfWork.Repository<Room>().GetAllAsync();
         }
 
-        public async Task<Room> GetOne(int roomId)
+        public async Task<Room> GetOne(Guid roomId)
         {
             return await _unitOfWork.Repository<Room>().FindAsync(roomId);
         }
@@ -59,7 +59,7 @@ namespace HomeAutomation.ApplicationTier.BusinessLogic.Services.v1_0
             }
         }
 
-        public async Task Delete(int roomId)
+        public async Task Delete(Guid roomId)
         {
             try
             {

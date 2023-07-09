@@ -17,7 +17,7 @@ namespace HomeAutomation.ApplicationTier.BusinessLogic.Services.v1_0
             return await _unitOfWork.Repository<Device>().GetAllAsync();
         }
 
-        public async Task<Device> GetOne(int deviceId)
+        public async Task<Device> GetOne(Guid deviceId)
         {
             return await _unitOfWork.Repository<Device>().FindAsync(deviceId);
         }
@@ -59,7 +59,7 @@ namespace HomeAutomation.ApplicationTier.BusinessLogic.Services.v1_0
             }
         }
 
-        public async Task Delete(int deviceId)
+        public async Task Delete(Guid deviceId)
         {
             try
             {

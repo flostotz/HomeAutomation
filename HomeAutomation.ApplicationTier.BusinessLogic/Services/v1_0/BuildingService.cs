@@ -17,7 +17,7 @@ namespace HomeAutomation.ApplicationTier.BusinessLogic.Services.v1_0
             return await _unitOfWork.Repository<Building>().GetAllAsync();
         }
 
-        public async Task<Building> GetOne(int buildingId)
+        public async Task<Building> GetOne(Guid buildingId)
         {
             return await _unitOfWork.Repository<Building>().FindAsync(buildingId);
         }
@@ -59,7 +59,7 @@ namespace HomeAutomation.ApplicationTier.BusinessLogic.Services.v1_0
             }
         }
 
-        public async Task Delete(int buildingId)
+        public async Task Delete(Guid buildingId)
         {
             try
             {
