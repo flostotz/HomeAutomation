@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using HomeAutomation.ApplicationTier.Entity.Dtos.v1_0;
 using HomeAutomation.ApplicationTier.Entity.Entities.v1_0;
-using HomeAutomation.ApplicationTier.Entity.guiderfaces.Services.v1_0;
+using HomeAutomation.ApplicationTier.Entity.Interfaces.Services.v1_0;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HomeAutomation.ApplicationTier.Api.Controllers.v1_0
