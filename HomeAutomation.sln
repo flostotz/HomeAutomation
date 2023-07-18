@@ -21,6 +21,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PresentationTier", "Present
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "HomeAutomation.PresentationTier.HomeAutomationFrontend", "HomeAutomation.PresentationTier.HomeAutomationFrontend\HomeAutomation.PresentationTier.HomeAutomationFrontend.esproj", "{F83BFB6C-55C6-466F-BBF3-AEB862D6FBB9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestTier", "TestTier", "{4F14EB15-F51C-4C0F-AC29-F312BDDA0980}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeAutomation.TestTier.BusinessLogic.Tests", "HomeAutomation.TestTier.BusinessLogic.Tests\HomeAutomation.TestTier.BusinessLogic.Tests.csproj", "{390C14F8-F78E-4F1A-A6E9-5943F740246D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +59,10 @@ Global
 		{F83BFB6C-55C6-466F-BBF3-AEB862D6FBB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F83BFB6C-55C6-466F-BBF3-AEB862D6FBB9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F83BFB6C-55C6-466F-BBF3-AEB862D6FBB9}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{390C14F8-F78E-4F1A-A6E9-5943F740246D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{390C14F8-F78E-4F1A-A6E9-5943F740246D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{390C14F8-F78E-4F1A-A6E9-5943F740246D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{390C14F8-F78E-4F1A-A6E9-5943F740246D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +74,7 @@ Global
 		{5C986B19-685E-4509-A8B3-A0D57943AEE6} = {3065AD26-8C5C-424D-9FF8-3F7D0A7697A8}
 		{9A074D6A-8028-4CA8-AD5B-06B2059ECCFF} = {3065AD26-8C5C-424D-9FF8-3F7D0A7697A8}
 		{F83BFB6C-55C6-466F-BBF3-AEB862D6FBB9} = {171C44E2-AD29-43A0-947F-F611BCE7CC3F}
+		{390C14F8-F78E-4F1A-A6E9-5943F740246D} = {4F14EB15-F51C-4C0F-AC29-F312BDDA0980}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {29F0CE48-4475-4D17-B574-1679EEEB5938}
