@@ -1,121 +1,131 @@
 ﻿using HomeAutomation.ApplicationTier.BusinessLogic.Services.v1_0;
+using HomeAutomation.ApplicationTier.DataAccess;
 using HomeAutomation.ApplicationTier.Entity.Entities.v1_0;
 using HomeAutomation.ApplicationTier.Entity.Interfaces;
 using Moq;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection.Emit;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HomeAutomation.TestTier.BusinessLogic.Tests.Services.v1_0
 {
-    public class DeviceServiceTests
+    public class DeviceServiceTest
     {
-        [Fact]
-        public async Task GetAll_ReturnsAllDevices()
-        {
-            // Arrange
-            var devices = new List<Device>
-            {
-                new Device { Id = Guid.NewGuid(), Name = "Device 1" },
-                new Device { Id = Guid.NewGuid(), Name = "Device 2" },
-                new Device { Id = Guid.NewGuid(), Name = "Device 3" }
+        private readonly Mock<IUnitOfWork> _unitOfWorkMock;
+        private readonly DeviceService _deviceService;
+
+        private List<Device> _deviceList = new List<Device>()
+            { 
+                new Device { Id = Guid.NewGuid(), Config = "Test", DeviceType = Guid.NewGuid(), Name = "Iphone" }
             };
-
-            var repositoryMock = new Mock<IRepository<Device>>();
-            repositoryMock.Setup(repo => repo.GetAllAsync()).ReturnsAsync(devices);
-
-            var unitOfWorkMock = new Mock<IUnitOfWork>();
-            unitOfWorkMock.Setup(uow => uow.Repository<Device>()).Returns(repositoryMock.Object);
-
-            var deviceService = new DeviceService(unitOfWorkMock.Object);
-
-            // Act
-            var result = await deviceService.GetAll();
-
-            // Assert
-            Assert.Equal(devices, result);
+        
+        public DeviceServiceTest()
+        {
+            _unitOfWorkMock = new Mock<IUnitOfWork>();
+            _deviceService = new DeviceService(_unitOfWorkMock.Object);
         }
 
         [Fact]
-        public async Task GetOne_ReturnsDeviceById()
+        public async Task GetAll_ShouldReturnListOfDevices()
+        {
+            // Arrange
+            var expectedDevices = _deviceList;
+            _unitOfWorkMock
+                .Setup(uow => uow.Repository<Device>().GetAllAsync())
+                .ReturnsAsync(expectedDevices);
+
+            // Act
+            var result = await _deviceService.GetAll();
+
+            // Assert
+            Assert.Equal(expectedDevices, result);
+        }
+
+        [Fact]
+        public async Task GetOne_WithValidDeviceId_ShoudReturnDevice()
         {
             // Arrange
             var deviceId = Guid.NewGuid();
-            var device = new Device { Id = deviceId, Name = "Device 1" };
-
-            var repositoryMock = new Mock<IRepository<Device>>();
-            repositoryMock.Setup(repo => repo.FindAsync(deviceId)).ReturnsAsync(device);
-
-            var unitOfWorkMock = new Mock<IUnitOfWork>();
-            unitOfWorkMock.Setup(uow => uow.Repository<Device>()).Returns(repositoryMock.Object);
-
-            var deviceService = new DeviceService(unitOfWorkMock.Object);
+            var expectedDevice = _deviceList.First();
+            _unitOfWorkMock
+                .Setup(uow => uow.Repository<Device>().FindAsync(deviceId))
+                .ReturnsAsync(expectedDevice);
 
             // Act
-            var result = await deviceService.GetOne(deviceId);
+            var result = await _deviceService.GetOne(deviceId);
 
             // Assert
-            Assert.Equal(device, result);
+            Assert.Equal(expectedDevice, result);
         }
 
         [Fact]
-        public async Task Update_DeviceExists_UpdatesDevice()
+        public async Task Update_WithValidDevice_ShouldUpdateDevice()
         {
             // Arrange
             var deviceId = Guid.NewGuid();
-            var deviceInput = new Device { Id = deviceId, Name = "Updated Device" };
+            var deviceInput = new Device { Id = deviceId };
+            var existingDevice = new Device { Id = deviceId };
 
-            var repositoryMock = new Mock<IRepository<Device>>();
-            repositoryMock.Setup(repo => repo.FindAsync(deviceId)).ReturnsAsync(new Device { Id = deviceId, Name = "Original Device" });
+            var deviceRepositoryMock = new Mock<IRepository<Device>>();
+            deviceRepositoryMock.Setup(repo => repo.FindAsync(deviceId)).ReturnsAsync(existingDevice);
 
-            var unitOfWorkMock = new Mock<IUnitOfWork>();
-            unitOfWorkMock.Setup(uow => uow.Repository<Device>()).Returns(repositoryMock.Object);
-
-            var deviceService = new DeviceService(unitOfWorkMock.Object);
+            _unitOfWorkMock.Setup(uow => uow.Repository<Device>()).Returns(deviceRepositoryMock.Object);
 
             // Act
-            await deviceService.Update(deviceInput);
+            await _deviceService.Update(deviceInput);
 
             // Assert
-            unitOfWorkMock.Verify(uow => uow.CommitTransaction(), Times.Once);
+            deviceRepositoryMock.Verify(repo => repo.FindAsync(deviceId), Times.Once);
+            _unitOfWorkMock.Verify(uow => uow.BeginTransaction(), Times.Once);
+            _unitOfWorkMock.Verify(uow => uow.CommitTransaction(), Times.Once);
+            _unitOfWorkMock.Verify(uow => uow.RollbackTransaction(), Times.Never);
         }
 
         [Fact]
-        public async Task Add_AddsDevice()
+        public async Task Add_WithValidDevice_ShouldAddDevice()
         {
             // Arrange
-            var deviceInput = new Device { Id = Guid.NewGuid(), Name = "New Device" };
+            var deviceInput = new Device { Id = Guid.NewGuid(), Config = "Test", DeviceType = Guid.NewGuid(), Name = "Samsung" };
 
-            var repositoryMock = new Mock<IRepository<Device>>();
+            var deviceRepositoryMock = new Mock<IRepository<Device>>();
 
-            var unitOfWorkMock = new Mock<IUnitOfWork>();
-            unitOfWorkMock.Setup(uow => uow.Repository<Device>()).Returns(repositoryMock.Object);
-
-            var deviceService = new DeviceService(unitOfWorkMock.Object);
+            _unitOfWorkMock.Setup(uow => uow.Repository<Device>()).Returns(deviceRepositoryMock.Object);
 
             // Act
-            await deviceService.Add(deviceInput);
+            await _deviceService.Add(deviceInput);
 
-            // Assert
-            unitOfWorkMock.Verify(uow => uow.CommitTransaction(), Times.Once);
+            // Assert            
+            deviceRepositoryMock.Verify(repo => repo.InsertAsync(deviceInput, true), Times.Once);
+            _unitOfWorkMock.Verify(uow => uow.BeginTransaction(), Times.Once);
+            _unitOfWorkMock.Verify(uow => uow.CommitTransaction(), Times.Once);
+            _unitOfWorkMock.Verify(uow => uow.RollbackTransaction(), Times.Never);
         }
 
         [Fact]
-        public async Task Delete_DeviceExists_DeletesDevice()
+        public async Task Delete_WithValidDeviceId_ShouldDeleteDevice()
         {
             // Arrange
             var deviceId = Guid.NewGuid();
+            var existingDevice = new Device { Id = deviceId };
 
-            var repositoryMock = new Mock<IRepository<Device>>();
-            repositoryMock.Setup(repo => repo.FindAsync(deviceId)).ReturnsAsync(new Device { Id = deviceId, Name = "Device 1" });
+            var deviceRepositoryMock = new Mock<IRepository<Device>>();
+            deviceRepositoryMock.Setup(repo => repo.FindAsync(deviceId)).ReturnsAsync(existingDevice);
 
-            var unitOfWorkMock = new Mock<IUnitOfWork>();
-            unitOfWorkMock.Setup(uow => uow.Repository<Device>()).Returns(repositoryMock.Object);
-
-            var deviceService = new DeviceService(unitOfWorkMock.Object);
+            _unitOfWorkMock.Setup(uow => uow.Repository<Device>()).Returns(deviceRepositoryMock.Object);
 
             // Act
-            await deviceService.Delete(deviceId);
+            await _deviceService.Delete(deviceId);
 
             // Assert
-            unitOfWorkMock.Verify(uow => uow.CommitTransaction(), Times.Once);
+            deviceRepositoryMock.Verify(repo => repo.FindAsync(deviceId), Times.Once);
+            deviceRepositoryMock.Verify(repo => repo.DeleteAsync(existingDevice, true), Times.Once);
+            _unitOfWorkMock.Verify(uow => uow.BeginTransaction(), Times.Once);
+            _unitOfWorkMock.Verify(uow => uow.CommitTransaction(), Times.Once);
+            _unitOfWorkMock.Verify(uow => uow.RollbackTransaction(), Times.Never);
         }
     }
 }
