@@ -20,7 +20,7 @@ namespace HomeAutomation.ApplicationTier.Api.Controllers.v1_0
 
         [HttpGet]
         [MapToApiVersion("1.0")]
-        public async Task<IList<Device>> GetAll()
+        public async Task<IList<DeviceDto>> GetAll()
         {
             return await _deviceService.GetAll();
         }
@@ -36,7 +36,7 @@ namespace HomeAutomation.ApplicationTier.Api.Controllers.v1_0
 
         [HttpGet("{id:guid}")]
         [MapToApiVersion("1.0")]
-        public async Task<Device> GetOne([FromRoute] Guid id)
+        public async Task<DeviceDto> GetOne([FromRoute] Guid id)
         {
             return await _deviceService.GetOne(id);
         }

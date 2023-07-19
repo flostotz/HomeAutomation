@@ -20,7 +20,7 @@ namespace HomeAutomation.ApplicationTier.Api.Controllers.v1_0
 
         [HttpGet]
         [MapToApiVersion("1.0")]
-        public async Task<IList<Building>> GetAll()
+        public async Task<IList<BuildingDto>> GetAll()
         {
             return await _buildingService.GetAll();
         }
@@ -36,7 +36,7 @@ namespace HomeAutomation.ApplicationTier.Api.Controllers.v1_0
 
         [HttpGet("{id:guid}")]
         [MapToApiVersion("1.0")]
-        public async Task<Building> GetOne([FromRoute] Guid id)
+        public async Task<BuildingDto> GetOne([FromRoute] Guid id)
         {
             return await _buildingService.GetOne(id);
         }

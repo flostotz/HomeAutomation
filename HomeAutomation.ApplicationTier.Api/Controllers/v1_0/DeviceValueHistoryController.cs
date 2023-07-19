@@ -20,7 +20,7 @@ namespace HomeAutomation.ApplicationTier.Api.Controllers.v1_0
 
         [HttpGet]
         [MapToApiVersion("1.0")]
-        public async Task<IList<DeviceValueHistory>> GetAll()
+        public async Task<IList<DeviceValueHistoryDto>> GetAll()
         {
             return await _deviceValueHistoryService.GetAll();
         }
@@ -36,7 +36,7 @@ namespace HomeAutomation.ApplicationTier.Api.Controllers.v1_0
 
         [HttpGet("{id:guid}")]
         [MapToApiVersion("1.0")]
-        public async Task<DeviceValueHistory> GetOne([FromRoute] Guid id)
+        public async Task<DeviceValueHistoryDto> GetOne([FromRoute] Guid id)
         {
             return await _deviceValueHistoryService.GetOne(id);
         }

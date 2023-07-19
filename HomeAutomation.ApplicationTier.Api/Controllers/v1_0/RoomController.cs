@@ -20,7 +20,7 @@ namespace HomeAutomation.ApplicationTier.Api.Controllers.v1_0
 
         [HttpGet]
         [MapToApiVersion("1.0")]
-        public async Task<IList<Room>> GetAll()
+        public async Task<IList<RoomDto>> GetAll()
         {
             return await _roomService.GetAll();
         }
@@ -35,7 +35,7 @@ namespace HomeAutomation.ApplicationTier.Api.Controllers.v1_0
 
         [HttpGet("{id:guid}")]
         [MapToApiVersion("1.0")]
-        public async Task<Room> GetOne([FromRoute] Guid id)
+        public async Task<RoomDto> GetOne([FromRoute] Guid id)
         {
             return await _roomService.GetOne(id);
         }
