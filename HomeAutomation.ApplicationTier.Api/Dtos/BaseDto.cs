@@ -1,6 +1,6 @@
 ﻿using Mapster;
 
-namespace HomeAutomation.ApplicationTier.Entity.Dtos
+namespace HomeAutomation.ApplicationTier.Api.Dtos
 {
     public abstract class BaseDto<TDto, TEntity> : IRegister
         where TDto : class, new()

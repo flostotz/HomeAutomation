@@ -1,5 +1,6 @@
 ﻿using HomeAutomation.ApplicationTier.Api.Controllers.v1_0;
-using HomeAutomation.ApplicationTier.Entity.Dtos.v1_0;
+using HomeAutomation.ApplicationTier.Api.Dtos.v1_0;
+
 using HomeAutomation.ApplicationTier.Entity.Entities.v1_0;
 using HomeAutomation.ApplicationTier.Entity.Interfaces.Services.v1_0;
 using Moq;

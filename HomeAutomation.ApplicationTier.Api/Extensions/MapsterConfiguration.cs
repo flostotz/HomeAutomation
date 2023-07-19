@@ -1,4 +1,5 @@
-﻿using HomeAutomation.ApplicationTier.Entity.Dtos;
+﻿using HomeAutomation.ApplicationTier.Api.Dtos;
+using HomeAutomation.ApplicationTier.Entity.Dtos;
 using Mapster;
 using System.Reflection;
 
