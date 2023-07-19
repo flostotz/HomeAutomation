@@ -11,4 +11,17 @@ public partial class DeviceValueHistory
     public Guid Device { get; set; }
 
     public virtual Device IdNavigation { get; set; } = null!;
+
+    public override bool Equals(object? obj)
+    {
+        return obj is DeviceValueHistory history &&
+               Id.Equals(history.Id) &&
+               Timestamp == history.Timestamp &&
+               Value == history.Value;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Id, Timestamp, Value);
+    }
 }

@@ -7,4 +7,16 @@ public partial class DeviceType
     public string Type { get; set; } = null!;
 
     public virtual Device? Device { get; set; }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is DeviceType type &&
+               Id.Equals(type.Id) &&
+               Type == type.Type;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(Id, Type, Device);
+    }
 }
