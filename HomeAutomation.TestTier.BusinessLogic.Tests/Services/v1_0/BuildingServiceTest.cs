@@ -1,15 +1,7 @@
 ﻿using HomeAutomation.ApplicationTier.BusinessLogic.Services.v1_0;
-using HomeAutomation.ApplicationTier.DataAccess;
 using HomeAutomation.ApplicationTier.Entity.Entities.v1_0;
 using HomeAutomation.ApplicationTier.Entity.Interfaces;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HomeAutomation.TestTier.BusinessLogic.Tests.Services.v1_0
 {
@@ -20,7 +12,7 @@ namespace HomeAutomation.TestTier.BusinessLogic.Tests.Services.v1_0
         private List<Building> _buildingList = new List<Building>()
             { new Building { Id = Guid.NewGuid(), Housenumber = "7", State = "Gerolstein", Street = "Eichenweg", ZipCode = "54568" },
             { new Building { Id = Guid.NewGuid(), Housenumber = "37", State = "Walsdorf", Street = "Kölner Straße", ZipCode = "54567" } } };
-        
+
         public BuildingServiceTest()
         {
             _unitOfWorkMock = new Mock<IUnitOfWork>();

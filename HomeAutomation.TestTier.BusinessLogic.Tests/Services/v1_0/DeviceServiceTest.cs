@@ -1,15 +1,7 @@
 ﻿using HomeAutomation.ApplicationTier.BusinessLogic.Services.v1_0;
-using HomeAutomation.ApplicationTier.DataAccess;
 using HomeAutomation.ApplicationTier.Entity.Entities.v1_0;
 using HomeAutomation.ApplicationTier.Entity.Interfaces;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HomeAutomation.TestTier.BusinessLogic.Tests.Services.v1_0
 {
@@ -19,10 +11,10 @@ namespace HomeAutomation.TestTier.BusinessLogic.Tests.Services.v1_0
         private readonly DeviceService _deviceService;
 
         private List<Device> _deviceList = new List<Device>()
-            { 
+            {
                 new Device { Id = Guid.NewGuid(), Config = "Test", DeviceType = Guid.NewGuid(), Name = "Iphone" }
             };
-        
+
         public DeviceServiceTest()
         {
             _unitOfWorkMock = new Mock<IUnitOfWork>();

@@ -1,8 +1,8 @@
 using HomeAutomation.ApplicationTier.Api.Extensions;
-using HomeAutomation.ApplicationTier.Entity;
-using HomeAutomation.ApplicationTier.DataAccess;
-using Microsoft.OpenApi.Models;
 using HomeAutomation.ApplicationTier.BusinessLogic;
+using HomeAutomation.ApplicationTier.DataAccess;
+using HomeAutomation.ApplicationTier.Entity;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
